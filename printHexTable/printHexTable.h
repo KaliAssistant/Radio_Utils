@@ -160,7 +160,7 @@ void printColorHexTable256(uint8_t* buffer, size_t buffer_len, ANSI_Color_Map_t*
     }
     printf("%s |+%s\n", ANSI_LEVEL_COLOR[maxRowLevel], RESET);
   }
-  printf("+------------------------------- *printHexTable256 v1.0* -------------------------------+\n");
+  printf("+--------------------------------- *printHexTable v1.0* --------------------------------+\n");
 }
 
 
