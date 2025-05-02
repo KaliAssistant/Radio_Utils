@@ -20,12 +20,36 @@
 #include <stdbool.h>
 #include <stdio.h>
 #include <stdlib.h>
-
+#include <string.h>
 #include "./ANSI_types.h" // ANSI types defines, enums and structures... etc.
 
 
 
-void printHexTable256(uint8_t* buffer, size_t buffer_len, ANSI_Color_Map_t* ansiMap, size_t ansiMap_len, ANSI_ErrTag_Map_t* errMap, size_t errMap_len) {
+void printColorHexTable256(uint8_t* buffer, size_t buffer_len, ANSI_Color_Map_t* ansiMap, size_t ansiMap_len, ANSI_ErrTag_Map_t* errMap, size_t errMap_len, const char* title_str) {
+  size_t title_str_len = strlen(title_str);
+  printf("+");
+  if(title_str_len <= 40) {
+    if(title_str_len % 2 != 0) printf("-");
+    for(int i = 0; i < (66 - title_str_len)/2; i++) {
+      printf("-");
+    }
+    printf(" %s ", title_str);
+    for(int i = 0; i < (66 - title_str_len)/2; i++) {
+      printf("-");
+    }
+  } else {
+    for(int i = 0; i < 13; i++) {
+      printf("-");
+    }
+    char _P[41];
+    strncpy(_P, title_str, 37);
+    strcpy(_P + 37, "...");
+    printf(" %s ", _P);
+    for(int i = 0; i < 13; i++) {
+      printf("-");
+    }
+  }
+  printf("----- ASCII -------+\n");
   const char* RESET = "\e[0m";
   uint8_t levelMap[256] = {0}; // 0 = NML
   // Apply tag map overlay
