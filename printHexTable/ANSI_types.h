@@ -16,24 +16,24 @@
 #define ANSI_TYPES_H
 
 typedef enum{
-  ANSI_ErrLevel_NML = 0b00,
-  ANSI_ErrLevel_DBG = 0b01,
-  ANSI_ErrLevel_WAN = 0b10,
-  ANSI_ErrLevel_ERR = 0b11
+    ANSI_ErrLevel_NML = 0b00,
+    ANSI_ErrLevel_DBG = 0b01,
+    ANSI_ErrLevel_WAN = 0b10,
+    ANSI_ErrLevel_ERR = 0b11
 } ANSI_ErrLevel_t;
 
 typedef struct{
-  uint8_t byteAddrBegin;
-  uint8_t byteAddrEnd;
-  char charBegin;
-  char charEnd;
-  char* ansiColorStr;
+    uint8_t byteAddrBegin;
+    uint8_t byteAddrEnd;
+    char charBegin;
+    char charEnd;
+    char* ansiColorStr;
 } ANSI_Color_Map_t;
 
 typedef struct{
-  uint8_t byteAddrBegin;
-  uint8_t byteAddrEnd;
-  ANSI_ErrLevel_t errLevel;
+    uint8_t byteAddrBegin;
+    uint8_t byteAddrEnd;
+    ANSI_ErrLevel_t errLevel;
 } ANSI_ErrTag_Map_t;
 
 const char* ANSI_LEVEL_COLOR[4] = {
