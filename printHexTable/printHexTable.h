@@ -5,7 +5,7 @@
  * Licence:     GNU/GPLv3.0
  *
  * Description:
- *    A header-only utility for generating terminal-friendly hex+ASCII tables with
+ *    A header file for generating terminal-friendly hex+ASCII tables with
  *    per-byte ANSI color annotations and error level tagging. The output visually
  *    highlights regions with color-coded ranges and severity levels (NML, DBG,
  *    WAN, ERR), making it ideal for debugging binary data, memory dumps, or
