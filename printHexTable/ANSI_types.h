@@ -23,27 +23,23 @@ typedef enum{
 } ANSI_ErrLevel_t;
 
 typedef struct{
-    uint8_t byteAddrBegin;
-    uint8_t byteAddrEnd;
-    char charBegin;
-    char charEnd;
-    char* ansiColorStr;
-} ANSI_Color_Map_t;
+    char charBegin[256];
+    char charEnd[256];
+    char* ansiColorStr[256];
+} ANSIColorMap256_t;
 
 typedef struct{
-    uint8_t byteAddrBegin;
-    uint8_t byteAddrEnd;
-    ANSI_ErrLevel_t errLevel;
-} ANSI_ErrTag_Map_t;
+    ANSI_ErrLevel_t errLevel[256];
+} ANSIErrTagMap256_t;
 
-const char* ANSI_LEVEL_COLOR[4] = {
+static const char* ANSI_LEVEL_COLOR[4] = {
     "\e[0m",        // NML
     "\e[38;5;33m",  // DBG - fg Blue, bg NL
     "\e[38;5;226m", // WAN - fg Yellow, bg NL
     "\e[38;5;196m"  // ERR - fg Red, bg NL
 };
 
-const char* ANSI_LEVEL_COLOR_BG[4] = {
+static const char* ANSI_LEVEL_COLOR_BG[4] = {
     "\e[0m",                      // NML
     "\e[48;5;33m",                // DBG - bg Blue, fg NL
     "\e[48;5;226m\e[38;5;16m",    // WAN - bg Yellow, fg BLACK
