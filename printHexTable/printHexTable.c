@@ -22,7 +22,7 @@
 #include <stdint.h>
 //#include "printHexTable.h"
 #include "ANSI_types.h"
-#include <colorUtils/conv.h>
+#include <colorUtils/colorutl.h>
 #include <printfUtils/printfutl.h>
 
 
@@ -54,13 +54,13 @@ static char* __p_R_i_N_t_H_e_X_t_A_b_L_e_T_a_I_l__(bool color, const char* str) 
     const char* display_str = (rainbow_str) ? rainbow_str : str;
 
     char preview[61] = {0};  // buffer for truncated version
-    bool truncated = false;
+    //bool truncated = false;
 
     if (orig_len > 60) {
         strncpy(preview, str, 57);
         strcpy(preview + 57, "...");
         display_str = preview;
-        truncated = true;
+        //truncated = true;
         orig_len = 60;
     }
 
@@ -110,12 +110,12 @@ static char* __p_R_i_N_t_H_e_X_t_A_b_L_e_2_5_6__(uint8_t *buffer, size_t buffer_
 
     const char* tail_buf = (tail_alloc_buf) ? tail_alloc_buf : tail_header_str;
 
-    for (int row = 0; row < 16; row++) {
+    for (uint8_t row = 0; row < 16; row++) {
         char ascii[17] = {0};  // Collect 16 ASCII chars
         sappendf(&dst_buf, "+ %X|", row);
         //printf("+ %X|", row);
-        for (int col = 0; col < 16; col++) {
-            int i = row * 16 + col;
+        for (uint8_t col = 0; col < 16; col++) {
+            uint8_t i = row * 16 + col;
             if (i < buffer_len) {
                 sappendf(&dst_buf, " %02X ", buffer[i]);
                 //printf(" %02X ", buffer[i]);
@@ -129,8 +129,8 @@ static char* __p_R_i_N_t_H_e_X_t_A_b_L_e_2_5_6__(uint8_t *buffer, size_t buffer_
         ascii[16] = '\0'; // null-terminate
         sappendf(&dst_buf, "| ");
         //printf("| ");
-        for (int k = 0; k < 16; k++) {
-            int idx = row * 16 + k;
+        for (uint8_t k = 0; k < 16; k++) {
+            uint8_t idx = row * 16 + k;
             uint8_t c = (idx < buffer_len) ? buffer[idx] : 0xFF;
             if (ascii[k]) {
                 //printf("%", ascii[k]);
@@ -153,12 +153,12 @@ static char* __p_R_i_N_t_H_e_X_t_A_b_L_e_2_5_6__(uint8_t *buffer, size_t buffer_
         const char *_pvp_title_str = title_str;
         size_t title_str_len = strlen(title_str);
         char preview[41] = {0};  // buffer for truncated version
-        bool truncated = false;
+        //bool truncated = false;
         if (title_str_len > 40) {
             strncpy(preview, title_str, 37);
             strcpy(preview + 37, "...");
             _pvp_title_str = preview;
-            truncated = true;
+            //truncated = true;
         }
         size_t _pvp_str_len = strlen(_pvp_title_str);
         size_t total_pad = (66 > _pvp_str_len) ? (66 - _pvp_str_len) : 0;
@@ -212,12 +212,12 @@ static char* __p_r_i_n_t_C_o_l_o_r_H_e_x_T_a_b_l_e_2_5_6__(uint8_t* buffer, size
         const char *_pvp_title_str = title_str;
         size_t title_str_len = strlen(title_str);
         char preview[41] = {0};  // buffer for truncated version
-        bool truncated = false;
+        //bool truncated = false;
         if (title_str_len > 40) {
             strncpy(preview, title_str, 37);
             strcpy(preview + 37, "...");
             _pvp_title_str = preview;
-            truncated = true;
+            //truncated = true;
         }
         size_t _pvp_str_len = strlen(_pvp_title_str);
         size_t total_pad = (66 > _pvp_str_len) ? (66 - _pvp_str_len) : 0;
@@ -277,8 +277,8 @@ static char* __p_r_i_n_t_C_o_l_o_r_H_e_x_T_a_b_l_e_2_5_6__(uint8_t* buffer, size
         //printf("%s+ %X|%s", ANSI_LEVEL_COLOR[maxRowLevel], row, RESET);
         char ascii[17] = {0};  // Collect 16 ASCII chars
         const char* asciiColor[16] = {0};  // Store color for each ASCII cell
-        for (int col = 0; col < 16; col++) {
-            int i = row * 16 + col;
+        for (uint8_t col = 0; col < 16; col++) {
+            uint8_t i = row * 16 + col;
             // Defaults
             const char* color = (__ansiMap__.ansiColorStr[i]) ? __ansiMap__.ansiColorStr[i] : NULL;
             char left = isprint(__ansiMap__.charBegin[i]) ? __ansiMap__.charBegin[i] : ' ';
@@ -305,8 +305,8 @@ static char* __p_r_i_n_t_C_o_l_o_r_H_e_x_T_a_b_l_e_2_5_6__(uint8_t* buffer, size
         sappendf(&dst_buf, "%s| %s", ANSI_LEVEL_COLOR[maxRowLevel], RESET);
         //printf("%s| %s", ANSI_LEVEL_COLOR[maxRowLevel], RESET);
         
-        for (int k = 0; k < 16; k++) {
-            int idx = row * 16 + k;
+        for (uint8_t k = 0; k < 16; k++) {
+            uint8_t idx = row * 16 + k;
             uint8_t c = (idx < buffer_len) ? buffer[idx] : 0xFF;
             const char* color = asciiColor[k];
             if (ascii[k]) {
@@ -345,6 +345,43 @@ static char* __p_r_i_n_t_C_o_l_o_r_H_e_x_T_a_b_l_e_2_5_6__(uint8_t* buffer, size
 }
 
 
+static void __a_d_d_r_2_A_n_s_i_C_o_l_o_r_M_a_p_2_5_6__(ANSIColorMap256_t *colorMap,
+                                                        uint8_t colorAddrBegin, uint8_t colorAddrEnd, 
+                                                        const char *colorStr,
+                                                        uint8_t charAddrBegin, const char charBegin,
+                                                        uint8_t charAddrEnd, const char charEnd, bool overwrite) {
+    if (!colorMap) return;
+    // End Addr Must Bigger Then Begin Addr. 
+    if (colorAddrEnd < colorAddrBegin || charAddrEnd < charAddrBegin) return;
+    
+    for (uint8_t i = colorAddrBegin; i < colorAddrEnd + 1; i++) {
+        if (overwrite || colorMap->ansiColorStr[i] == NULL) {
+            colorMap->ansiColorStr[i] = colorStr;
+        }
+    }
+    // Set charBegin
+    if (overwrite || colorMap->charBegin[charAddrBegin] == 0) {
+        colorMap->charBegin[charAddrBegin] = charBegin;
+    }
+    // Set charEnd
+    if (overwrite || colorMap->charEnd[charAddrEnd] == 0) {
+        colorMap->charEnd[charAddrEnd] = charEnd;
+    }
+    return;
+}
+
+
+static void __a_d_d_r_2_A_n_s_i_E_r_r_T_a_g_2_5_6__(ANSIErrTagMap256_t *errMap,
+                                                    uint8_t errAddrBegin, uint8_t errAddrEnd, ANSI_ErrLevel_t errLevel) {
+    if (!errMap) return;
+    if (errAddrEnd < errAddrBegin) return;
+    for (uint8_t i = errAddrBegin; i < errAddrEnd + 1; i++) {
+        if (errMap->errLevel[i] < errLevel) errMap->errLevel[i] = errLevel;
+    }
+    return;
+}
+
+
 __attribute__((weak, alias("__g_E_n_R_a_I_n_B_o_W_S_t_R__"))) char* genRainbowStr(const char* str);
 __attribute__((weak, alias("__p_R_i_N_t_H_e_X_t_A_b_L_e_T_a_I_l__"))) char* printHexTableTail(bool color, const char* str);
 __attribute__((weak, alias("__p_R_i_N_t_H_e_X_t_A_b_L_e_2_5_6__"))) 
@@ -353,3 +390,11 @@ char* printHexTable256(uint8_t *buffer, size_t buffer_len, const char *title_str
 __attribute__((weak, alias("__p_r_i_n_t_C_o_l_o_r_H_e_x_T_a_b_l_e_2_5_6__"))) 
 char* printColorHexTable256(uint8_t* buffer, size_t buffer_len, ANSIColorMap256_t *ansiMap,
                             ANSIErrTagMap256_t *errMap, const char* title_str, const char* tail_str);
+__attribute__((weak, alias("__a_d_d_r_2_A_n_s_i_C_o_l_o_r_M_a_p_2_5_6__"))) 
+void addr2AnsiColorMap256(ANSIColorMap256_t *colorMap, uint8_t colorAddrBegin, uint8_t colorAddrEnd, 
+                          const char *colorStr,
+                          uint8_t charAddrBegin, const char charBegin,
+                          uint8_t charAddrEnd, const char charEnd, bool overwrite);
+
+__attribute__((weak, alias("__a_d_d_r_2_A_n_s_i_E_r_r_T_a_g_2_5_6__")))
+void addr2AnsiErrTag256(ANSIErrTagMap256_t *errMap, uint8_t errAddrBegin, uint8_t errAddrEnd, ANSI_ErrLevel_t errLevel);

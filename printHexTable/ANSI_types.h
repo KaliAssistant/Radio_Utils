@@ -25,7 +25,7 @@ typedef enum{
 typedef struct{
     char charBegin[256];
     char charEnd[256];
-    char* ansiColorStr[256];
+    const char* ansiColorStr[256];
 } ANSIColorMap256_t;
 
 typedef struct{
