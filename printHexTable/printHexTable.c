@@ -348,8 +348,8 @@ static char* __p_r_i_n_t_C_o_l_o_r_H_e_x_T_a_b_l_e_2_5_6__(uint8_t* buffer, size
 static void __a_d_d_r_2_A_n_s_i_C_o_l_o_r_M_a_p_2_5_6__(ANSIColorMap256_t *colorMap,
                                                         uint8_t colorAddrBegin, uint8_t colorAddrEnd, 
                                                         const char *colorStr,
-                                                        uint8_t charAddrBegin, const char charBegin,
-                                                        uint8_t charAddrEnd, const char charEnd, bool overwrite) {
+                                                        uint8_t charAddrBegin, char charBegin,
+                                                        uint8_t charAddrEnd, char charEnd, bool overwrite) {
     if (!colorMap) return;
     // End Addr Must Bigger Then Begin Addr. 
     if (colorAddrEnd < colorAddrBegin || charAddrEnd < charAddrBegin) return;
@@ -393,8 +393,8 @@ char* printColorHexTable256(uint8_t* buffer, size_t buffer_len, ANSIColorMap256_
 __attribute__((weak, alias("__a_d_d_r_2_A_n_s_i_C_o_l_o_r_M_a_p_2_5_6__"))) 
 void addr2AnsiColorMap256(ANSIColorMap256_t *colorMap, uint8_t colorAddrBegin, uint8_t colorAddrEnd, 
                           const char *colorStr,
-                          uint8_t charAddrBegin, const char charBegin,
-                          uint8_t charAddrEnd, const char charEnd, bool overwrite);
+                          uint8_t charAddrBegin, char charBegin,
+                          uint8_t charAddrEnd, char charEnd, bool overwrite);
 
 __attribute__((weak, alias("__a_d_d_r_2_A_n_s_i_E_r_r_T_a_g_2_5_6__")))
 void addr2AnsiErrTag256(ANSIErrTagMap256_t *errMap, uint8_t errAddrBegin, uint8_t errAddrEnd, ANSI_ErrLevel_t errLevel);

@@ -35,8 +35,8 @@ char* printColorHexTable256(uint8_t* buffer, size_t buffer_len, ANSIColorMap256_
 
 void addr2AnsiColorMap256(ANSIColorMap256_t *colorMap, uint8_t colorAddrBegin, uint8_t colorAddrEnd, 
                           const char *colorStr,
-                          uint8_t charAddrBegin, const char charBegin,
-                          uint8_t charAddrEnd, const char charEnd, bool overwrite);
+                          uint8_t charAddrBegin, char charBegin,
+                          uint8_t charAddrEnd, char charEnd, bool overwrite);
 
 void addr2AnsiErrTag256(ANSIErrTagMap256_t *errMap, uint8_t errAddrBegin, uint8_t errAddrEnd, ANSI_ErrLevel_t errLevel);
 

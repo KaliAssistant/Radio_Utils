@@ -20,5 +20,6 @@ int main(void) {
 
     char* test = printColorHexTable256(buffer, 128, &clr, &tag, NULL, NULL);
     printf("%s", test);
+    free(test); // test printfutl malloc
     return 0;
 }
