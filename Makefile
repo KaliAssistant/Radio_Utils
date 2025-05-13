@@ -19,15 +19,15 @@ export CC AR LD
 LIB_COLORUTILS_OBJS := $(wildcard colorUtils/build/*.o)
 LIB_PRINTFUTILS_OBJS := $(wildcard printfUtils/build/*.o)
 LIB_PRINTHEXTABLE_OBJS :=\
-												 printHexTable/build/printHexTable.o\
-												 colorUtils/build/hsv.o\
-												 colorUtils/build/ansi.o\
-												 colorUtils/build/floatcv.o\
-												 printfUtils/build/printfutl.o
+	printHexTable/build/printHexTable.o\
+	colorUtils/build/hsv.o\
+	colorUtils/build/ansi.o\
+	colorUtils/build/floatcv.o\
+	printfUtils/build/printfutl.o
 
 all: $(OBJDIR) $(SUBDIRS) $(LIB_COLORUTILS_TARGET)\
-													$(LIB_PRINTFUTILS_TARGET)\
-													$(LIB_PRINTHEXTABLE_TARGET)
+	$(LIB_PRINTFUTILS_TARGET)\
+	$(LIB_PRINTHEXTABLE_TARGET)
 
 $(OBJDIR):
 	@mkdir -p $@
